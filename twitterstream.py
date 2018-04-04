@@ -59,14 +59,12 @@ def fetchsamples():
   for line in response:
     print line.strip()
 
-def fetchsamples3():
-  url = "https://stream.twitter.com/1.1/statuses/sample.json"
-  url_search = "https://api.twitter.com/1.1/search/tweets.json?q=warsaw"
+def fetchsamples_search():
+  url = "https://api.twitter.com/1.1/search/tweets.json?q=warsaw"
   parameters = []
   response = twitterreq(url, "GET", parameters)
   for line in response:
-      line_encoded = str(line, encoding='utf-8')
-      printline_encoded.strip()
+    print line.strip()
             
 
 def fetchsamples2():
@@ -93,4 +91,4 @@ def fetchsamples_write():
       json.dump(encoded_response, f, indent=4)
 
 if __name__ == '__main__':
-  fetchsamples()
+  fetchsamples_search()
