@@ -1,8 +1,7 @@
 import chardet
 import oauth2 as oauth
-import urllib.request as urllib
+import urllib2 as urllib
 import json
-from tweepy import OAuthHandler as tweepy_handler
 
 # See assignment1.html instructions or README for how to get these credentials
 
@@ -55,12 +54,19 @@ def twitterreq(url, method, parameters):
 
 def fetchsamples():
   url = "https://stream.twitter.com/1.1/statuses/sample.json"
+  parameters = []
+  response = twitterreq(url, "GET", parameters)
+  for line in response:
+    print line.strip()
+
+def fetchsamples3():
+  url = "https://stream.twitter.com/1.1/statuses/sample.json"
   url_search = "https://api.twitter.com/1.1/search/tweets.json?q=warsaw"
   parameters = []
   response = twitterreq(url, "GET", parameters)
   for line in response:
       line_encoded = str(line, encoding='utf-8')
-      print(line_encoded.strip())
+      printline_encoded.strip()
             
 
 def fetchsamples2():
@@ -71,7 +77,7 @@ def fetchsamples2():
   for line in response:
       
       line_encoded = json.loads(line.decode('ascii'))
-      print(line_encoded)
+      print line_encoded
 
 def fetchsamples_write():
   url = "https://stream.twitter.com/1.1/statuses/sample.json"
@@ -81,6 +87,7 @@ def fetchsamples_write():
   raw_response = response.read()
   encoding = raw_response.info().get_content_charset('utf8')
   encoded_response = json.loads(raw_response.decode(encoding))
+  print "test"
 
   with open("output.json", "w+", encoding ='utf8') as f:
       json.dump(encoded_response, f, indent=4)
